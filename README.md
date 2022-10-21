@@ -1,39 +1,44 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Night Color
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+[![pub package](https://img.shields.io/pub/v/night_color.svg)](https://pub.dartlang.org/packages/night_color) ![travis](https://api.travis-ci.com/lpongetti/night_color.svg?branch=master)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Night Color adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Add night color to your pubspec:
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  night_color: any # or the latest version on Pub
 ```
 
-## Additional information
+Use it
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+@override
+Widget build(BuildContext context) {
+  return NightColor(
+    enabled: enabled,
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Night Color Demo Home Page'),
+      ),
+      body: Container(),
+    ),
+  );
+}
+```
+
+### Run the example
+
+See the `example/` folder for a working example app.
+
+## Supporting Me
+
+A donation through my Ko-Fi page would be infinitly appriciated:
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/lorenzopongetti)
+
+but, if you can't or won't, a star on GitHub and a like on pub.dev would also go a long way!
+
+Every donation gives me fuel to continue my open-source projects and lets me know that I'm doing a good job.
