@@ -44,37 +44,51 @@ class NightColor extends StatefulWidget {
 
 class _NightColorState extends State<NightColor> {
   late double opacity;
-  late Timer _timer;
+  Timer? _timer;
 
   @override
   void initState() {
-    opacity = _computeOpacity();
-
-    _timer = Timer.periodic(widget.timerDuration, (timer) {
-      setState(() {
-        opacity = _computeOpacity();
-      });
-    });
+    _setOpacity();
     super.initState();
   }
 
   @override
+  void didUpdateWidget(covariant NightColor oldWidget) {
+    if (oldWidget.enabled != widget.enabled) {
+      _setOpacity();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.enabled
-        ? ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              widget.color.withOpacity(opacity),
-              BlendMode.darken,
-            ),
-            child: widget.child,
-          )
-        : widget.child;
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(
+        widget.color.withOpacity(opacity),
+        BlendMode.darken,
+      ),
+      child: widget.child,
+    );
+  }
+
+  _setOpacity() {
+    if (widget.enabled) {
+      opacity = _computeOpacity();
+      _timer = Timer.periodic(widget.timerDuration, (timer) {
+        setState(() {
+          opacity = _computeOpacity();
+        });
+      });
+    } else {
+      opacity = 0;
+      _timer?.cancel();
+    }
   }
 
   double _computeOpacity() {
